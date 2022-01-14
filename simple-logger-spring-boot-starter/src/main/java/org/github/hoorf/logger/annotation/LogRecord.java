@@ -1,5 +1,7 @@
 package org.github.hoorf.logger.annotation;
 
+import org.springframework.core.annotation.AliasFor;
+
 import java.lang.annotation.*;
 
 @Target(ElementType.METHOD)
@@ -7,5 +9,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface LogRecord {
 
-    String content();
+    String before() default "";
+
+    String success() default "";
+
+    String error() default "";
 }
