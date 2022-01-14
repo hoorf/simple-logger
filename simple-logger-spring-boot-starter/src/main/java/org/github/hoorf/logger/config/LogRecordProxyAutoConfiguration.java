@@ -21,10 +21,4 @@ public class LogRecordProxyAutoConfiguration {
     public ParseFunctionFactory parseFunctionFactory(@Autowired List<IParseFunction> parseFunctions) {
         return new ParseFunctionFactory(parseFunctions);
     }
-
-    @Bean
-    @ConditionalOnMissingBean(IParseFunction.class)
-    public DefaultParseFunction parseFunction() {
-        return new DefaultParseFunction();
-    }
 }

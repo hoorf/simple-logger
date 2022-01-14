@@ -81,6 +81,6 @@ public class LogRecordAspect {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
         Class<?> clazz = joinPoint.getTarget().getClass();
         String result = parseService.getExpression(template,evaluationContext);
-        log.info("aspect : {}", result);
+        log.info("{}", result);
     }
 }

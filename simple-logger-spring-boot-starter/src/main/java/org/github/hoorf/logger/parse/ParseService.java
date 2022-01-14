@@ -31,20 +31,24 @@ public class ParseService {
     private LogRecordExpressionEvaluator logRecordExpressionEvaluator = new LogRecordExpressionEvaluator();
 
     public String getExpression(String template, EvaluationContext evaluationContext) {
+        try {
+            return getExpression0(template, evaluationContext);
+        } catch (Exception e) {
+            log.error("template parse error for {}",e);
+        }
+        return template;
+    }
+
+    private String getExpression0(String template, EvaluationContext evaluationContext) {
         LogTemplateLexer lexer = new LogTemplateLexer(CharStreams.fromString(template));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         LogTemplateParser parser = new LogTemplateParser(tokens);
-        boolean buildParseTree = parser.getBuildParseTree();
-        log.info("buildParseTree :{}",buildParseTree);
-        log.info("isTrace :{}",parser.isTrace());
-        log.info("ParseInfo :{}",parser.getParseInfo());
+        LogTemplateParser.ContentContext content = parser.content();
+        if (parser.getNumberOfSyntaxErrors() > 0) {
+            log.warn("there are some syntax problem in temple [{}] ,please check", template);
+            return template;
+        }
         LogTemplateBaseVisitor<String> visitor = new LogTemplateBaseVisitor<String>() {
-            @Override
-            public String visitParamName(LogTemplateParser.ParamNameContext ctx) {
-                System.err.println(ctx.ID());
-                return ctx.getText();
-            }
-
             @Override
             public String visitContent(LogTemplateParser.ContentContext ctx) {
                 StringBuilder stringBuilder = new StringBuilder();
@@ -82,7 +86,6 @@ public class ParseService {
                 return result;
             }
         };
-        LogTemplateParser.ContentContext content = parser.content();
         return visitor.visit(content);
     }
 }

@@ -17,7 +17,7 @@ public class LogTemplateParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, ID=2, FO=3, FC=4, MO=5, MC=6, ROOT=7, STR=8, WS=9;
+		ID=1, FO=2, FC=3, MO=4, MC=5, ROOT=6, STR=7, WS=8;
 	public static final int
 		RULE_content = 0, RULE_template = 1, RULE_method = 2, RULE_methodName = 3, 
 		RULE_param = 4, RULE_paramName = 5;
@@ -30,13 +30,13 @@ public class LogTemplateParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'.'", null, "'{'", "'}'", "'('", "')'", "'#'"
+			null, null, "'{'", "'}'", "'('", "')'", "'#'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, "ID", "FO", "FC", "MO", "MC", "ROOT", "STR", "WS"
+			null, "ID", "FO", "FC", "MO", "MC", "ROOT", "STR", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -333,10 +333,7 @@ public class LogTemplateParser extends Parser {
 
 	public static class ParamNameContext extends ParserRuleContext {
 		public TerminalNode ROOT() { return getToken(LogTemplateParser.ROOT, 0); }
-		public List<TerminalNode> ID() { return getTokens(LogTemplateParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(LogTemplateParser.ID, i);
-		}
+		public TerminalNode ID() { return getToken(LogTemplateParser.ID, 0); }
 		public ParamNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -351,34 +348,13 @@ public class LogTemplateParser extends Parser {
 	public final ParamNameContext paramName() throws RecognitionException {
 		ParamNameContext _localctx = new ParamNameContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_paramName);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(35);
 			match(ROOT);
-			setState(37); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(36);
-				_la = _input.LA(1);
-				if ( !(_la==T__0 || _la==ID) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				}
-				setState(39); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( _la==T__0 || _la==ID );
+			setState(36);
+			match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -393,18 +369,17 @@ public class LogTemplateParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13,\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\n)\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\6\2\20\n\2\r\2\16\2\21\3\3\3\3"+
 		"\3\3\5\3\27\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\3"+
-		"\7\3\7\6\7(\n\7\r\7\16\7)\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\3\4\2)\2\17\3"+
-		"\2\2\2\4\26\3\2\2\2\6\30\3\2\2\2\b\37\3\2\2\2\n!\3\2\2\2\f%\3\2\2\2\16"+
-		"\20\5\4\3\2\17\16\3\2\2\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22"+
-		"\3\3\2\2\2\23\27\7\n\2\2\24\27\5\6\4\2\25\27\5\n\6\2\26\23\3\2\2\2\26"+
-		"\24\3\2\2\2\26\25\3\2\2\2\27\5\3\2\2\2\30\31\7\5\2\2\31\32\5\b\5\2\32"+
-		"\33\7\7\2\2\33\34\5\n\6\2\34\35\7\b\2\2\35\36\7\6\2\2\36\7\3\2\2\2\37"+
-		" \7\4\2\2 \t\3\2\2\2!\"\7\5\2\2\"#\5\f\7\2#$\7\6\2\2$\13\3\2\2\2%\'\7"+
-		"\t\2\2&(\t\2\2\2\'&\3\2\2\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\r\3\2\2\2"+
-		"\5\21\26)";
+		"\7\3\7\3\7\3\7\2\2\b\2\4\6\b\n\f\2\2\2%\2\17\3\2\2\2\4\26\3\2\2\2\6\30"+
+		"\3\2\2\2\b\37\3\2\2\2\n!\3\2\2\2\f%\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2"+
+		"\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\3\3\2\2\2\23\27\7\t\2"+
+		"\2\24\27\5\6\4\2\25\27\5\n\6\2\26\23\3\2\2\2\26\24\3\2\2\2\26\25\3\2\2"+
+		"\2\27\5\3\2\2\2\30\31\7\4\2\2\31\32\5\b\5\2\32\33\7\6\2\2\33\34\5\n\6"+
+		"\2\34\35\7\7\2\2\35\36\7\5\2\2\36\7\3\2\2\2\37 \7\3\2\2 \t\3\2\2\2!\""+
+		"\7\4\2\2\"#\5\f\7\2#$\7\5\2\2$\13\3\2\2\2%&\7\b\2\2&\'\7\3\2\2\'\r\3\2"+
+		"\2\2\4\21\26";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
