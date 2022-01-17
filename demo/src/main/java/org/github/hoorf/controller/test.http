@@ -32,3 +32,18 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:8080/fireMultiOne
+Content-Type: application/json
+
+{
+  "id": "17208",
+  "orderNo": "C1720817208",
+  "desc": "请发货",
+  "discount": {
+    "discountAmount": 100,
+    "num": 10
+  }
+}
+
+###

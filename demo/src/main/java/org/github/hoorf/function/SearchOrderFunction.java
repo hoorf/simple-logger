@@ -1,4 +1,4 @@
-package org.github.hoorf.controller.function;
+package org.github.hoorf.function;
 
 import org.github.hoorf.logger.parse.IParseFunction;
 import org.springframework.stereotype.Component;

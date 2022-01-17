@@ -12,12 +12,6 @@ import java.util.List;
 public class LogRecordProxyAutoConfiguration {
 
     @Bean
-    @ConditionalOnMissingBean(IFunctionService.class)
-    public IFunctionService functionService(ParseFunctionFactory parseFunctionFactory) {
-        return new DefaultFunctionServiceImpl(parseFunctionFactory);
-    }
-
-    @Bean
     public ParseFunctionFactory parseFunctionFactory(@Autowired List<IParseFunction> parseFunctions) {
         return new ParseFunctionFactory(parseFunctions);
     }

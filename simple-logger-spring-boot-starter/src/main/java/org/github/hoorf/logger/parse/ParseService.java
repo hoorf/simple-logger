@@ -26,9 +26,8 @@ public class ParseService {
     @Autowired
     private ParseFunctionFactory functionFactory;
 
-    ExpressionParser spelExpressionParser = new SpelExpressionParser();
+   private ExpressionParser spelExpressionParser = new SpelExpressionParser();
 
-    private LogRecordExpressionEvaluator logRecordExpressionEvaluator = new LogRecordExpressionEvaluator();
 
     public String getExpression(String template, EvaluationContext evaluationContext) {
         try {

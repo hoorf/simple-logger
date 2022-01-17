@@ -1,14 +1,22 @@
 package org.github.hoorf.controller;
 
-import org.github.hoorf.controller.model.OrderInfo;
+import lombok.extern.slf4j.Slf4j;
+import org.github.hoorf.logger.model.LogRecordContext;
+import org.github.hoorf.model.OrderInfo;
 import org.github.hoorf.logger.annotation.LogRecord;
+import org.github.hoorf.service.OrderShipmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 public class OrderController {
+
+    @Autowired
+    private OrderShipmentService orderShipmentService;
 
     /**
      * 基础属性
@@ -42,4 +50,19 @@ public class OrderController {
     public OrderInfo fireSend(@RequestBody OrderInfo orderInfo){
         return orderInfo;
     }
+
+
+    /**
+     * 重叠
+     * @param orderInfo
+     * @return
+     */
+    @PostMapping("/fireMultiOne")
+    @LogRecord(success = "1.订单id->{#orderInfo.id},订单备注->{#orderInfo.desc},操作人->{#operator}")
+    public OrderInfo fireMultiOne(@RequestBody OrderInfo orderInfo){
+        LogRecordContext.put("operator","张三");
+        orderInfo = orderShipmentService.shipment(orderInfo);
+        return orderInfo;
+    }
+
 }

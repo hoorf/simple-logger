@@ -1,4 +1,4 @@
-package org.github.hoorf.controller.model;
+package org.github.hoorf.model;
 
 import lombok.Data;
 
@@ -8,6 +8,8 @@ public class OrderInfo {
     private String id;
 
     private String orderNo;
+
+    private String desc;
 
     private OrderDiscount discount;
 
