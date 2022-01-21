@@ -46,7 +46,7 @@ public class OrderController {
      * @return
      */
     @PostMapping("/fireSend")
-    @LogRecord(success = "订单id->{#orderInfo.id},开始发货,发货信息->{searchSendInfo({#orderInfo.id})}")
+    @LogRecord(success = "订单id->{#orderInfo.id},开始发货,发货信息->{searchSendInfo{{#orderInfo.id}}}")
     public OrderInfo fireSend(@RequestBody OrderInfo orderInfo){
         return orderInfo;
     }
